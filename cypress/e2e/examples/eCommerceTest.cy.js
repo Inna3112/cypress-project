@@ -3,7 +3,11 @@ import productsPage from '../../support/pageObjects/ProductsPage';
 import cartPage from '../../support/pageObjects/CartPage';
 import confirmationPage from '../../support/pageObjects/ConfirmationPage';
 
+//Terminal command for changing the environment variable (url) for the test:
+//npx cypress run --spec cypress/e2e/examples/eCommerceTest.cy.js --env url=https://rahulshettyacademy.com
+
 describe("E-commerce test", () => {
+  const baseUrl = Cypress.env('url');
   let dataObj;
   before(() => {
     cy.fixture("example")
@@ -13,7 +17,7 @@ describe("E-commerce test", () => {
   })
 
   it("Submit order", () => {
-    homePage.goTo("https://rahulshettyacademy.com/loginpagePractise/#/");
+    homePage.goTo(`${baseUrl}/loginpagePractise/#/`);
     homePage.login(dataObj.userName, dataObj.password);
     productsPage.pageValidation();
     productsPage.getCardCount().should("have.length", 4);
