@@ -8,8 +8,10 @@ module.exports = defineConfig({
     // userId: 'admin',
     // password: 'password',
   },
+  reporter: 'cypress-mochawesome-reporter',
   e2e: {
     setupNodeEvents(on, config) {
+      require('cypress-mochawesome-reporter/plugin')(on);
       // implement node event listeners here
     },
     // specPattern: 'cypress/integraions/examples/*.js',
