@@ -23,7 +23,8 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-
+//можна додавати кастомні команди
+//викликати cy.submitFormDetails();
 Cypress.Commands.add("submitFormDetails", () => {
   cy.get("#country").type("India");
   //змінить лише для цього тесту але не працює
@@ -31,4 +32,11 @@ Cypress.Commands.add("submitFormDetails", () => {
   cy.wait(5000);
   cy.get(".suggestions > ul > li > a").click();
   cy.get(".btn-success").click();
+})
+//можна додавати кастомні квері
+Cypress.Commands.addQuery("getById", (id) => {
+  const getFn = cy.now("get", `[data-cy=${id}]`);
+  return () => {
+    return getFn();
+  }
 })
